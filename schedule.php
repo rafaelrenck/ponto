@@ -2,7 +2,7 @@
   <div class="aside">
     <div class="box">
       <div class="title">
-        Meus Extras
+        Horas Extras
       </div>
       <ul>
         <li>Não há lançamento de horas extras</li>
@@ -11,7 +11,9 @@
     <div class="box">
       <div class="title">
         Informações ao RH
-        <i class="fas fa-plus-circle"></i>
+        <button>
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
       <ul>
         <li>Não há informações ao RH</li>
@@ -19,8 +21,10 @@
     </div>
     <div class="box">
       <div class="title">
-        Minhas Trocas
-        <i class="fas fa-plus-circle"></i>
+        Trocas de Plantão
+        <button>
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
       <ul>
         <li>Não há lançamento de trocas</li>
@@ -28,7 +32,7 @@
     </div>
   </div>
   <div class="calendar">
-    <div class="month"><i class="fas fa-chevron-circle-left"></i> <span class="big">Maio/2021</span> <i class="fas fa-chevron-circle-right"></i></div>
+    <div class="month">Maio/2021</div>
     <div class="weekday">Seg</div>
     <div class="weekday">Ter</div>
     <div class="weekday">Qua</div>
