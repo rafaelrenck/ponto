@@ -7,19 +7,24 @@
 :root {
   --red: #FA3954;
 	--yellow: #FFC400;
+  --dark-yellow: #554935;
 	--green: #00C21D;
+  --dark-green: #224D4A;
 	--blue: #42B4E6;
-	--dark-blue: #0069AA;
-	--gray: #92949f;
+	--dark-blue: #224168;
 	--orange: #FF8811;
 	--purple-red: #AF0071;
 	--purple: #581C66;
 	--light-purple: #774B96;
-	--light-brown: #6C534E;
-	--brown: #2C1A1D;
+
+  --gray: #92949F;
+  --light-gray: #CCCDD0;
+  --dark-gray: #5B5E68;
 
   --navy: #2b2e43;
   --light-navy: #343750;
+  --dark-navy: #1C1E2D;
+
   --white: #ffffff;
 }
 
@@ -64,21 +69,21 @@ header {
   border-bottom: 1px solid var(--light-navy);
 }
 
-header div.content {
+header .content {
   height: 5rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-header div.content nav {
+header .content nav {
   height: 5rem;
 }
 
-header div.content nav a {
+header .content nav a {
   text-transform: uppercase;
   display: inline-block;
   position: relative;
@@ -90,19 +95,19 @@ header div.content nav a {
   transition: color 0.2s;
 }
 
-header div.content nav a + a {
+header .content nav a + a {
   margin-left: 5rem;
 }
 
-header div.content nav a:hover {
+header .content nav a:hover {
   color: var(--white);
 }
 
-header div.content nav a.active {
+header .content nav a.active {
   color: var(--white);
 }
 
-header div.content nav a.active::after {
+header .content nav a.active::after {
   content: '';
   height: 0.35rem;
   width: 100%;
@@ -112,7 +117,7 @@ header div.content nav a.active::after {
   background-color: var(--red);
 }
 
-header div.content div.profile {
+header .content .profile {
   height: 3rem;
   border-radius: 1.5rem;
   padding: 0.25rem 1rem 0.25rem 0.25rem;
@@ -123,52 +128,58 @@ header div.content div.profile {
   align-items: center;
 }
 
-header div.content div.profile img {
+header .content .profile img,
+header .content .profile svg {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 1.25rem;
   margin-right: 1rem;
 }
 
-header div.content div.profile a {
+header .content .profile svg {
+  color: var(--dark-navy);
+}
+
+header .content .profile a {
   margin-left: 1rem;
   color: var(--gray);
 
   transition: color 0.2s;
 }
 
-header div.content div.profile a:hover,
-header div.content div.close a:hover {
+header .content .profile a:hover,
+header .content .close a:hover {
   color: var(--white);
 }
 
-header div.content div.close a {
+header .content .close a {
   color: var(--gray);
 
   transition: color 0.2s;
 }
 
 main {
-  height: calc(100vh - 5rem);
+  min-height: calc(100vh - 5rem);
+  padding: 3rem;
 }
 
-main div.splash {
+main .splash {
   width: 100%;
-  height: 100%;
+  min-height: calc(100vh - 15rem);
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-main div.splash div.content {
+main .splash .content {
   padding: 3rem 5rem;
   background-color: var(--light-navy);
   color: var(--gray);
   border-left: 0.35rem solid var(--red);
 }
 
-main div.splash div.content h1 {
+main .splash .content h1 {
   color: var(--white);
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -176,10 +187,128 @@ main div.splash div.content h1 {
   margin-bottom: 2rem;
 }
 
-main div.splash div.content p {
+main .splash .content p {
   line-height: 2rem;
 }
 
-main div.splash div.content a {
+main .splash .content a {
   color: var(--white);
+}
+
+main .schedule {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  column-gap: 2rem;
+}
+
+main .schedule .aside {
+  max-width: 28rem;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  row-gap: 2rem;
+}
+
+main .schedule .aside .box {
+  padding: 2rem;
+
+  background-color: var(--dark-navy);
+  border-radius: 1rem;
+}
+
+main .schedule .aside .box .title {
+  height: 2rem;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+main .schedule .aside .box .title i {
+  font-size: 2rem;
+}
+
+main .schedule .aside .box ul {
+  list-style: none;
+  color: var(--gray);
+}
+
+main .schedule .calendar {
+  padding: 2rem;
+  min-width: 38rem;
+  max-width: 48rem;
+
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 1rem;
+  grid-auto-rows: auto auto 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  background-color: var(--dark-navy);
+  border-radius: 1rem;
+}
+
+main .schedule .calendar > div {
+  padding: 0.5rem;
+  min-height: 5rem;
+  max-height: 6rem;
+
+  background-color: var(--navy);
+  border-radius: 1rem;
+
+  overflow: hidden;
+}
+
+main .schedule .calendar > div.month {
+  min-height: 0;
+  height: 2rem;
+  padding: 0 0 1rem 0;
+
+  grid-column: 1 / span 7;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  background-color: transparent;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 0;
+}
+
+main .schedule .calendar > div.month i {
+  font-size: 2rem;
+}
+
+main .schedule .calendar > div.month .big {
+  font-size: 1.5rem;
+}
+
+main .schedule .calendar > div.weekday {
+  padding: 0;
+  min-height: 0;
+
+  background-color: transparent;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+main .schedule .calendar > div.noday {
+  background-color: transparent;
+}
+
+main .schedule .calendar > div.sunday {
+  background-color: var(--dark-green);
+}
+
+main .schedule .calendar > div.holyday {
+  background-color: var(--dark-blue);
 }

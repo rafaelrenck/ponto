@@ -1,5 +1,6 @@
 <!doctype html>
 <?php session_start(); ?>
+<?php include_once("config.php"); ?>
 <html lang="pt-br">
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -16,33 +17,35 @@
         <img src="img/ponto.svg" alt="">
         <?php if (isset($_SESSION["matricula"])) { ?>
           <nav>
-            <a href="" class='active'>Minha Escala</a>
-            <a href="" class=''>Minha Equipe</a>
+            <a href="index.php" class='<?php if ((!(isset($_GET['page']))) || ($_GET['page'] == "schedule")) echo "active"; ?>'>Minha Escala</a>
+            <a href="index.php?page=shifts" class='<?php if ((isset($_GET['page'])) && ($_GET['page'] == "shifts")) echo "active"; ?>'>Minha Equipe</a>
+            <a href="index.php?page=documents" class='<?php if ((isset($_GET['page'])) && ($_GET['page'] == "documents")) echo "active"; ?>'>Meus Documentos</a>
           </nav>
           <div class="profile">
-            <?php if (file_exists("../img/usssers/".$_SESSION['matricula'].".jpg")) { ?>
-              <img src="../img/users/<?= $_SESSION['matricula']?>.jpg" alt="<?= $_SESSION['nomereduzido']?>">
+            <?php if (file_exists($root."img/users/".$_SESSION['matricula'].".jpg")) { ?>
+              <img src="<?= $root ?>img/users/<?= $_SESSION['matricula']?>.jpg" alt="<?= $_SESSION['nomereduzido']?>">
             <?php } else { ?>
-              <img src="../../img/users/nophoto.svg">
+              <?php echo file_get_contents($root."img/users/nophoto.svg"); ?>
             <?php } ?>
-            Rafael Renck
-            <a href="http://172.20.1.1/index.php"><i class="fas fa-times"></i></a>
+            <?= $_SESSION['nomereduzido'] ?>
+            <a href="<?= $root ?>index.php"><i class="fas fa-times"></i></a>
           </div>
         <?php } else { ?>
           <div class="close">
-            <a href="http://172.20.1.1/index.php"><i class="fas fa-times"></i></a>
+            <a href="<?= $root ?>index.php"><i class="fas fa-times"></i></a>
           </div>
         <?php } ?>
       </div>
     </header>
     <main>
-      <?php if (isset($_SESSION["matriculaa"])) { ?>
+      <?php if (isset($_SESSION["matricula"])) { ?>
+        <?php include_once("schedule.php"); ?>
       <?php } else { ?>
         <div class="splash">
           <div class="content">
             <h1>Aviso</h1>
             <p>Você precisa estar logado para acessar esta página.</p>
-            <p>Clique <a href="http://172.20.1.1/index.php">aqui</a> para realizar o seu login.</p>
+            <p>Clique <a href="<?= $root ?>index.php">aqui</a> para realizar o seu login.</p>
           </div>
         </div>
       <?php } ?>
@@ -53,9 +56,3 @@
     <script src="js/app.js"></script>
   </body>
 </html>
-
-if (file_exists("img/users/".$_SESSION['matricula'].".jpg")) {
-												echo "<img src='img/users/".$_SESSION['matricula'].".jpg' class='fotoperfil'>";
-											} else {
-												echo "<i class='fas fa-user-circle fa-2x'></i>";
-											}
