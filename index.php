@@ -17,9 +17,10 @@
         <img src="img/ponto.svg" alt="">
         <?php if (isset($_SESSION["matricula"])) { ?>
           <nav>
-            <a href="index.php" class='<?php if ((!(isset($_GET['page']))) || ($_GET['page'] == "schedule")) echo "active"; ?>'>Minha Escala</a>
-            <a href="index.php?page=shifts" class='<?php if ((isset($_GET['page'])) && ($_GET['page'] == "shifts")) echo "active"; ?>'>Minha Equipe</a>
-            <a href="index.php?page=documents" class='<?php if ((isset($_GET['page'])) && ($_GET['page'] == "documents")) echo "active"; ?>'>Meus Documentos</a>
+            <a href="<?= $root ?>index.php"><i class="fas fa-home"></i> Home</a>
+            <a href="index.php" class='<?php if ((!(isset($_GET['page']))) || ($_GET['page'] == "schedule")) echo "active"; ?>'><i class="far fa-calendar-alt"></i> Minha Escala</a>
+            <a href="index.php?page=shifts" class='<?php if ((isset($_GET['page'])) && ($_GET['page'] == "shifts")) echo "active"; ?>'><i class="fas fa-users"></i> Minha Equipe</a>
+            <a href="index.php?page=documents" class='<?php if ((isset($_GET['page'])) && ($_GET['page'] == "documents")) echo "active"; ?>'><i class="fas fa-paste"></i> Meus Documentos</a>
           </nav>
           <div class="profile">
             <?php if (file_exists($root."img/users/".$_SESSION['matricula'].".jpg")) { ?>
@@ -28,7 +29,7 @@
               <?php echo file_get_contents($root."img/users/nophoto.svg"); ?>
             <?php } ?>
             <?= $_SESSION['nomereduzido'] ?>
-            <a href="<?= $root ?>index.php"><i class="fas fa-times"></i></a>
+            <a href="<?= $root ?>logout.php"><i class="fas fa-times"></i></a>
           </div>
         <?php } else { ?>
           <div class="close">
@@ -39,7 +40,15 @@
     </header>
     <main>
       <?php if (isset($_SESSION["matricula"])) { ?>
-        <?php include_once("schedule.php"); ?>
+        <?php if ((!(isset($_GET['page']))) || ($_GET['page'] == "schedule")) { ?>
+          <?php include_once("schedule.php"); ?>
+        <?php } ?>
+        <?php if ((isset($_GET['page'])) && ($_GET['page'] == "shifts")) { ?>
+          <?php include_once("shifts.php"); ?>
+        <?php } ?>
+        <?php if ((isset($_GET['page'])) && ($_GET['page'] == "documents")) { ?>
+          <?php include_once("documents.php"); ?>
+        <?php } ?>
       <?php } else { ?>
         <div class="splash">
           <div class="content">

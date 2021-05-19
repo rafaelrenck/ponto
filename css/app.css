@@ -46,22 +46,76 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body, input, button {
+body, input, button, select {
   font-family: 'Work Sans', serif;
   font-size: 1rem;
+}
+
+input, select {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 0.5rem;
+  color: var(--white);
+  background-color: var(--dark-navy);
+  border: 0;
+  border-radius: 0.5rem;
+
+  outline: 0;
+}
+
+select.green {
+  background-color: var(--dark-green);
+  color: var(--green);
 }
 
 h1, h2, h3, h4, h5, h6, strong {
   font-weight: 600;
 }
 
-button {
+button, select {
   cursor: pointer;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.showtooltip {
+  position: relative;
+}
+
+.showtooltip .tooltip {
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  right: calc(0 + 50%);
+  padding: 1rem 2rem;
+
+  color: var(--white);
+  background-color: var(--dark-navy);
+  border-left: 0.35rem solid var(--green);
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: opacity 0.2s;
+}
+
+.showtooltip .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.showtooltip:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 header {
@@ -80,6 +134,7 @@ header .content {
 }
 
 header .content nav {
+  flex-shrink: 0;
   height: 5rem;
 }
 
@@ -95,8 +150,12 @@ header .content nav a {
   transition: color 0.2s;
 }
 
+header .content nav a i {
+  margin-right: 0.5rem;
+}
+
 header .content nav a + a {
-  margin-left: 5rem;
+  margin-left: 3rem;
 }
 
 header .content nav a:hover {
@@ -213,14 +272,26 @@ main .schedule .aside {
   row-gap: 2rem;
 }
 
-main .schedule .aside .box {
+main .schedule .main {
+  max-width: 56rem;
+
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  row-gap: 2rem;
+}
+
+main .box {
   padding: 2rem;
 
   background-color: var(--light-navy);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
-main .schedule .aside .box .title {
+main .box .title,
+main .box label {
   height: 2rem;
 
   display: flex;
@@ -233,54 +304,44 @@ main .schedule .aside .box .title {
   position: relative;
 }
 
-main .schedule .aside .box .title button {
+main .box .title button {
   border: 0;
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   background-color: var(--dark-green);
   color: var(--green);
-  border-radius: 1rem;
+  border-radius: 1.25rem;
 
   position: absolute;
-  right: 0;
-  top: 0;
+  right: -0.75rem;
+  top: -0.75rem;
 }
 
-main .schedule .aside .box ul {
+main .box ul {
   list-style: none;
   color: var(--gray);
 }
 
-main .schedule .calendar {
-  padding: 2rem;
-  min-width: 38rem;
-  max-width: 48rem;
-
-  flex: 1;
+main .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 1rem;
   grid-auto-rows: auto auto;
-
-  background-color: var(--light-navy);
-  border-radius: 1rem;
 }
 
-main .schedule .calendar > div {
-  padding: 0.5rem;
+main .calendar .day {
   min-height: 5rem;
-  max-height: 6rem;
+  max-height: 5rem;
+  padding: 0.5rem;
 
   background-color: var(--navy);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   overflow: hidden;
 }
 
-main .schedule .calendar > div.month {
-  min-height: 0;
-  height: 3rem;
-  padding: 0 0 1rem 0;
+main .calendar .month {
+  margin-bottom: 1rem;
 
   grid-column: 1 / span 7;
 
@@ -288,29 +349,33 @@ main .schedule .calendar > div.month {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
-  text-align: center;
-  background-color: transparent;
-  border-radius: 0;
 }
 
-main .schedule .calendar > div.weekday {
-  min-height: 0;
-  padding: 0;
-
-  background-color: transparent;
+main .calendar .weekday {
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
 }
 
-main .schedule .calendar > div.noday {
-  background-color: transparent;
-}
-
-main .schedule .calendar > div.sunday {
+main .calendar .sunday {
   background-color: var(--dark-green);
 }
 
-main .schedule .calendar > div.holyday {
+main .calendar .holyday {
   background-color: var(--dark-blue);
+}
+
+main .shifts {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  row-gap: 2rem;
+}
+
+main .shifts .header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  column-gap: 2rem;
 }
